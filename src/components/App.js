@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieList from './MovieList';
+import SearchBar from './SearchBar';
 
 class App extends React.Component {
     state = {
@@ -32,9 +33,14 @@ class App extends React.Component {
         const newMovieList = this.state.movies.filter(
             m => m.id !== movie.id
         );
-        this.setState({
+
+        /* this.setState({
             movies: newMovieList
-        });
+         }); */
+
+        this.setState(state => ({
+            movies: newMovieList
+        }));
 
     }
 
@@ -43,7 +49,7 @@ class App extends React.Component {
             <div className='container'>
                 <div className="row">
                     <div className="col-lg-12">
-                        {/* <SearchBar /> */}
+                        <SearchBar />
                     </div>
                 </div>
                 <MovieList
