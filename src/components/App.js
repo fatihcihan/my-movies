@@ -4,29 +4,17 @@ import SearchBar from './SearchBar';
 
 class App extends React.Component {
     state = {
-        movies: [
-            {
-                id: 1,
-                name: "Matrix",
-                rating: 9,
-                overview: "Lorem ipsum matrix, dolor sit amet consectetur adipisicing elit. Tempore, itaque?",
-                imageUrl: "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"
-            },
-            {
-                id: 2,
-                name: "Interstellar",
-                rating: 8,
-                overview: "Lorem ipsum interstellar, dolor sit amet consectetur adipisicing elit. Tempore, itaque?",
-                imageUrl: "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
-            },
-            {
-                id: 3,
-                name: "The Game",
-                rating: 8.5,
-                overview: "Lorem ipsum the game, dolor sit amet consectetur adipisicing elit. Tempore, itaque?",
-                imageUrl: "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/4UOa079915QjiTA2u5hT2yKVgUu.jpg"
-            }
-        ]
+        movies: [],
+        searchQuery: ""
+    }
+
+    async componentDidMount() {
+        const baseURL = " http://localhost:3002/movies";
+        const response = await fetch(baseURL);
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+        this.setState({ movies: data })
     }
 
     deleteMovie = (movie) => {
@@ -34,26 +22,34 @@ class App extends React.Component {
             m => m.id !== movie.id
         );
 
-        /* this.setState({
-            movies: newMovieList
-         }); */
-
         this.setState(state => ({
             movies: newMovieList
         }));
 
     }
 
+    searchMovie = (event) => {
+        // console.log(event.target.value);
+        this.setState({ searchQuery: event.target.value })
+    }
+
     render() {
+
+        let filteredMovies = this.state.movies.filter(
+            (movie) => {
+                return movie.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
+            }
+        )
+
         return (
             <div className='container'>
                 <div className="row">
                     <div className="col-lg-12">
-                        <SearchBar />
+                        <SearchBar searchMovieProp={this.searchMovie} />
                     </div>
                 </div>
                 <MovieList
-                    movies={this.state.movies}
+                    movies={filteredMovies}
                     deleteMovieProp={this.deleteMovie}
                 />
             </div>
