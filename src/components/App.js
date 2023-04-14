@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieList from './MovieList';
 import SearchBar from './SearchBar';
+import AddMovie from './AddMovie'
 import axios from 'axios';
 
 
@@ -26,7 +27,7 @@ class App extends React.Component {
         this.setState(state => ({
             movies: newMovieList
         }))
-    } 
+    }
 
     searchMovie = (event) => {
         this.setState({ searchQuery: event.target.value })
@@ -50,6 +51,7 @@ class App extends React.Component {
                     movies={filteredMovies}
                     deleteMovieProp={this.deleteMovie}
                 />
+                <AddMovie />
             </div>
         );
     }
