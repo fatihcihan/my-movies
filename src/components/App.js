@@ -26,35 +26,7 @@ class App extends React.Component {
         this.setState(state => ({
             movies: newMovieList
         }))
-    }
-
-    // Fetch API (Get)
-    /*  async componentDidMount() {
-         const baseURL = " http://localhost:3002/movies";
-         const response = await fetch(baseURL);
-         console.log(response);
-         const data = await response.json();
-         console.log(data);
-         this.setState({ movies: data })
-     } */
-
-    // Fetch API (Delete)
-    /* deleteMovie = async (movie) => {
-        const baseURL = `http://localhost:3002/movies/${movie.id}`;
-
-        await fetch(baseURL, {
-            method: "DELETE"
-        });
-
-        const newMovieList = this.state.movies.filter(
-            m => m.id !== movie.id
-        );
-
-        this.setState(state => ({
-            movies: newMovieList
-        }));
-    } */
-
+    } 
 
     searchMovie = (event) => {
         this.setState({ searchQuery: event.target.value })
