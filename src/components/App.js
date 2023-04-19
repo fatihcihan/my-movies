@@ -1,7 +1,8 @@
 import React from 'react';
 import MovieList from './MovieList';
 import SearchBar from './SearchBar';
-import AddMovie from './AddMovie'
+import AddMovie from './AddMovie';
+import EditMovie from './EditMovie'
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -81,6 +82,9 @@ class App extends React.Component {
                     }>
 
                     </Route>
+
+                    <Route path="/edit/:id" element={<EditMovie/>} />
+
 
                 </Routes>
             </Router>
